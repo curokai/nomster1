@@ -9,7 +9,7 @@ class PlacesController < ApplicationController
   end
 
   def create
-         @place = current_user.places.create(place_params)
+      @place = current_user.places.create(place_params)
       if @place.valid?
         redirect_to root_path
       else
@@ -49,8 +49,6 @@ class PlacesController < ApplicationController
       if @place.user != current_user
         return render plain: 'Not Allowed', status: :forbidden
       end
-
-
       @place.destroy
       redirect_to root_path
     end
