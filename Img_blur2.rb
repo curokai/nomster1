@@ -14,8 +14,8 @@ def setImg
   end
 
 def convert_2
-   for i in 0..3
-     for j in 0..3
+   for i in 0..$k.length-1
+     for j in 0..$k.length-1
       if ($k[i][j]==1) 
         $k[i-1][j]=2 unless i<=0 and $k[i-1][j]==0
         $k[i][j-1]=2 unless j<=0 and $k[i][j-1]==0
