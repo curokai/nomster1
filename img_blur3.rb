@@ -1,76 +1,130 @@
-# Blur2 by Aichu Zhalilova / bootcamp UofA
 
-$k
-def setImg
-    $k=[[1,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[1,0,0,0,0,0,0,0,0,0,0,1]]
-  end 
-  def show
-  for i in 0..$k.length-1
-  for j in 0..$k.length-1
-      print $k[i][j].to_s+" "
-      end
-    puts"\n"
-  end
+class Image
+  def initialize (pixels)
+    @pixels=pixels
+    @location=[]
+    @newpixel=[]
   end
 
-def convert_2
-   for i in 0..$k.length-1
-     for j in 0..$k.length-1
-      if ($k[i][j]==1) 
+  def find_locations
+    t=0 
+    d=0
+   @pixels.each_with_index do |x, i|
+      x.each_with_index do |y, j|
+         @newpixel[d]=y
+         d=d+1
+        if (y==1)
 
-        $k[i-1][j]=2 if (i-1)>=0 and (i-1)<=$k.length-1 and  (j)>=0 and (j)<=$k.length-1  and $k[i-1][j]==0
-        $k[i-2][j]=2 if (i-2)>=0 and (i-2)<=$k.length-1 and  (j)>=0 and (j)<=$k.length-1  and $k[i-2][j]==0
-        $k[i-3][j]=2 if (i-3)>=0 and (i-3)<=$k.length-1 and  (j)>=0 and (j)<=$k.length-1  and $k[i-3][j]==0
-       
-        $k[i][j-1]=2 if (i)>=0 and (i)<=$k.length-1 and  (j-1)>=0 and (j-1)<=$k.length-1  and $k[i][j-1]==0
-        $k[i][j-2]=2 if (i)>=0 and (i)<=$k.length-1 and  (j-2)>=0 and (j-2)<=$k.length-1  and $k[i][j-2]==0
-        $k[i][j-3]=2 if (i)>=0 and (i)<=$k.length-1 and  (j-3)>=0 and (j-3)<=$k.length-1  and $k[i][j-3]==0
-      
-        $k[i+1][j]=2 if (i+1)>=0 and (i+1)<=$k.length-1 and  (j)>=0 and (j)<=$k.length-1  and $k[i+1][j]==0
-        $k[i+2][j]=2 if (i+2)>=0 and (i+2)<=$k.length-1 and  (j)>=0 and (j)<=$k.length-1  and $k[i+2][j]==0
-        $k[i+3][j]=2 if (i+3)>=0 and (i+3)<=$k.length-1 and  (j)>=0 and (j)<=$k.length-1  and $k[i+3][j]==0
-          
-        $k[i][j+1]=2 if (i)>=0 and (i)<=$k.length-1 and  (j+1)>=0 and (j+1)<=$k.length-1  and $k[i][j+1]==0
-        $k[i][j+2]=2 if (i)>=0 and (i)<=$k.length-1 and  (j+2)>=0 and (j+2)<=$k.length-1  and $k[i][j+2]==0
-        $k[i][j+3]=2 if (i)>=0 and (i)<=$k.length-1 and  (j+3)>=0 and (j+3)<=$k.length-1  and $k[i][j+3]==0
-      
-        $k[i-1][j-1]=3 if (i-1)>=0 and (i-1)<=$k.length-1 and  (j-1)>=0 and (j-1)<=$k.length-1  and $k[i-1][j-1]==0
-        $k[i-2][j-1]=3 if (i-2)>=0 and (i-2)<=$k.length-1 and  (j-1)>=0 and (j-1)<=$k.length-1  and $k[i-2][j-1]==0
-        $k[i-1][j-2]=3 if (i-1)>=0 and (i-1)<=$k.length-1 and  (j-2)>=0 and (j-2)<=$k.length-1  and $k[i-1][j-2]==0
- 
-        $k[i+1][j-1]=3 if (i+1)>=0 and (i+1)<=$k.length-1 and  (j-1)>=0 and (j-1)<=$k.length-1  and $k[i+1][j-1]==0
-        $k[i+2][j-1]=3 if (i+2)>=0 and (i+2)<=$k.length-1 and  (j-1)>=0 and (j-1)<=$k.length-1  and $k[i+2][j-1]==0
-        $k[i+1][j-2]=3 if (i+1)>=0 and (i+1)<=$k.length-1 and  (j-2)>=0 and (j-2)<=$k.length-1  and $k[i+1][j-2]==0
-        
-        $k[i-1][j+1]=3 if (i-1)>=0 and (i-1)<=$k.length-1 and  (j+1)>=0 and (j+1)<=$k.length-1  and $k[i-1][j+1]==0
-        $k[i-2][j+1]=3 if (i-2)>=0 and (i-2)<=$k.length-1 and  (j+1)>=0 and (j+1)<=$k.length-1  and $k[i-2][j+1]==0
-        $k[i-1][j+2]=3 if (i-1)>=0 and (i-1)<=$k.length-1 and  (j+2)>=0 and (j+2)<=$k.length-1  and $k[i-1][j+2]==0
+          if (@pixels.length-1 >= i+1)
+          @location[t]="#{i+1}#{j}".to_s 
+          t=t+1
+          end 
 
-        $k[i+1][j+1]=3 if (i+1)>=0 and (i+1)<=$k.length-1 and  (j+1)>=0 and (j+1)<=$k.length-1  and $k[i+1][j+1]==0
-        $k[i+2][j+1]=3 if (i+2)>=0 and (i+2)<=$k.length-1 and  (j+1)>=0 and (j+1)<=$k.length-1  and $k[i+2][j+1]==0
-        $k[i+1][j+2]=3 if (i+1)>=0 and (i+1)<=$k.length-1 and  (j+2)>=0 and (j+2)<=$k.length-1  and $k[i+1][j+2]==0
+          if (@pixels.length-1 >= i+2)
+          @location[t]="#{i+2}#{j}".to_s 
+          t=t+1
+          end  
+
           
+          if (0 <= i-1)
+          @location[t]="#{i-1}#{j}".to_s
+          t=t+1 
+          end
+          
+          if (0 <= i-2)
+          @location[t]="#{i-2}#{j}".to_s
+          t=t+1 
+          end
+
+          if (0 <= j-1)      
+          @location[t]="#{i}#{j-1}".to_s
+          t=t+1 
+          end
+          
+          if (0 <= j-2)      
+          @location[t]="#{i}#{j-2}".to_s
+          t=t+1 
+          end
+           
+
+          if (@pixels.length-1 >= j+1)
+          @location[t]="#{i}#{j+1}".to_s
+          t=t+1 
+          end
+
+          if (@pixels.length-1 >= j+2)
+          @location[t]="#{i}#{j+2}".to_s
+          t=t+1 
+          end 
+
+
+          if (@pixels.length-1 >= j+1 and @pixels.length-1 >= i+1)
+          @location[t]="#{i+1}#{j+1}".to_s
+          t=t+1 
+          end  
+          
+
+          if (0 <= j-1 and 0 <= i-1 )
+          @location[t]="#{i-1}#{j-1}".to_s
+          t=t+1 
+          end   
+
+          if (@pixels.length-1 >= j+1 and 0 <= i-1 )
+          @location[t]="#{i-1}#{j+1}".to_s
+          t=t+1 
+          end
+
+          if (@pixels.length-1 >= i+1 and 0 <= j-1 )
+          @location[t]="#{i+1}#{j-1}".to_s
+          t=t+1 
+          end
+
+       end       
       end
+    end    
+  end
+
+  def add_number_to_locations
+    d=0
+    @location.each_with_index do |l , t|
+    t=0;
+    @pixels.each_with_index do |x, i|
+      x.each_with_index do |y, j|
+       if("#{i}#{j}".to_s == l.to_s)
+        @newpixel[t]=1  
+       end 
+      t=t+1
      end
-     puts"\n"
     end
-end
-
-
-def convert2_1
-  for i in 0..$k.length-1
-  for j in 0..$k.length-1
-    if ($k[i][j]==3 or $k[i][j]==2)
-     $k[i][j]=1
-    end
-   end
   end
 end
 
 
-setImg
-show
-convert_2
-convert2_1
-show
- 
+
+def output
+  d=0
+   @pixels.each_with_index do |x, i|
+      x.each_with_index do |y, j|
+        print "#{@newpixel[d]} "
+        d=d+1
+     end
+     puts "\n"
+   end
+end
+
+end
+image = Image.new([
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+])
+image.find_locations
+image.add_number_to_locations
+image.output

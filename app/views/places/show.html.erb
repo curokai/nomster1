@@ -76,6 +76,14 @@
           <%= f.submit "Add a Comment", class: 'btn btn-primary' %>
         </div>
       <% end %>
+
+      <div class="clear"></div>
+      <%= simple_form_for @photo, url: '#' do |f| %>
+      <%= f.input :caption %>
+      <%= f.submit "Add an Image", class: 'btn btn-primary' %>
+      <% end %> 
+
+
     </div>
   </div>
 </div>
